@@ -31,7 +31,7 @@
             </fileset>
         </copy>
         <copy todir="${app.destination.tmp.path}/config/packages"
-              file="${project.basedir}/config/packages/myConfig.yaml"
+              file="${project.basedir}/build/production/myConfig.yaml"
               overwrite="true">
             <filterchain>
                 <replacetokens begintoken="{{" endtoken="}}">
