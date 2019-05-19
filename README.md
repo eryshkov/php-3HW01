@@ -18,6 +18,7 @@
     ```
   php phing.phar -f ./build/production/build.xml -Dapp.destination.path=/Users/eugem/Developer/PHP/php-3HW01.prod -Dapp.domain=test.com
   ```
+  параметры `-Dapp.destination.path` и `-Dapp.domain` должны быть обязательно указаны
 * применена дополнительная настройка web-сервера nginx:
  <img src="/screens/nginx.png" width="50%">
 
