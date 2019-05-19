@@ -14,6 +14,10 @@
 ## Информация для проверяющего
 * выбран фреймворк `Symfony 4`
 * "настройка" для задания №1 хранится в файле [myConfig.yaml](/config/packages/myConfig.yaml) и он привязан к Container в файле [services.yaml](/config/services.yaml) в секции `bind:`
+* Скрипт сборки проекта должен запускаться примерно так:
+    ```
+  php phing.phar -f ./build/production/build.xml -Dapp.destination.path=/Users/eugem/Developer/PHP/php-3HW01.prod -Dapp.domain=test.com
+  ```
 * применена дополнительная настройка web-сервера nginx:
  <img src="/screens/nginx.png" width="50%">
 
