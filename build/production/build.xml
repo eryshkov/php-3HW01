@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="php-3HW01" default="prepare">
+    <target name="prepare">
+        <property name="app.destination.path" value="${project.basedir}"/>
+    </target>
+</project>
