@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="php-3HW01" default="copyFiles" basedir=".">
+<project name="php-3HW01" default="composer" basedir=".">
     <target name="prepare">
         <echo msg="I'm Phing"/>
         <echo msg="My base dirrectory: ${project.basedir}"/>
@@ -27,9 +27,13 @@
               overwrite="true">
             <filterchain>
                 <replacetokens begintoken="{{" endtoken="}}">
-                    <token key="site_name" value="${app.domain}"></token>
+                    <token key="domain" value="${app.domain}"></token>
                 </replacetokens>
             </filterchain>
         </copy>
+    </target>
+
+    <target name="composer" depends="copyFiles">
+
     </target>
 </project>
