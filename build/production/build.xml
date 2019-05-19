@@ -34,6 +34,8 @@
     </target>
 
     <target name="composer" depends="copyFiles">
-
+        <exec dir="${app.destination.path}" executable="composer" passthru="true">
+            <arg value="install"/>
+        </exec>
     </target>
 </project>
