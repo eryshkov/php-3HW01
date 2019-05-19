@@ -13,7 +13,7 @@
 
 ## Информация для проверяющего
 * выбран фреймворк `Symfony 4`
-* параметр для задания №1 хранится в файле [myConfig.yaml](/config/packages/myConfig.yaml) и он привязан к Container в файле [services.yaml](/config/services.yaml) в секции `bind:`
+* "настройка" для задания №1 хранится в файле [myConfig.yaml](/config/packages/myConfig.yaml) и он привязан к Container в файле [services.yaml](/config/services.yaml) в секции `bind:`
 * применена дополнительная настройка web-сервера nginx:
  <img src="/screens/nginx.png" width="50%">
 
