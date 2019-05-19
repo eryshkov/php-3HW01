@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="php-3HW01" default="composer" basedir=".">
+    <tstamp>
+        <format property="date_time" pattern="%Y-%m-%d-%H-%M-%S" timezone="Europe/Moscow"/>
+    </tstamp>
+    <property name="app.destination.tmp.path" value="${app.destination.path}/${date_time}"/>
+    <property name="app.destination.current.path" value="${app.destination.path}/current"/>
+
     <target name="prepare">
         <echo msg="I'm Phing"/>
         <echo msg="My base dirrectory: ${project.basedir}"/>
         <echo msg="Received destination directory: ${app.destination.path}"/>
+        <echo msg="Received destination temporary directory: ${app.destination.tmp.path}"/>
         <echo msg="Received domain: ${app.domain}"/>
     </target>
 
     <target name="copyFiles" depends="prepare">
         <mkdir dir="${app.destination.path}"/>
-        <copy todir="${app.destination.path}">
+        <mkdir dir="${app.destination.tmp.path}"/>
+        <copy todir="${app.destination.tmp.path}">
             <fileset dir="${project.basedir}">
                 <include name="**"/>
                 <exclude name="config/packages/myConfig.yaml"/>
@@ -22,7 +30,7 @@
                 <exclude name="*.md"/>
             </fileset>
         </copy>
-        <copy todir="${app.destination.path}/config/packages"
+        <copy todir="${app.destination.tmp.path}/config/packages"
               file="${project.basedir}/config/packages/myConfig.yaml"
               overwrite="true">
             <filterchain>
@@ -33,9 +41,19 @@
         </copy>
     </target>
 
-    <target name="composer" depends="copyFiles">
-        <exec dir="${app.destination.path}" executable="composer" passthru="true">
+    <target name="symlink" depends="copyFiles">
+        <exec dir="${app.destination.path}" executable="ln" passthru="true">
+            <arg value="-s"/>
+            <arg value="-v"/>
+            <arg path="${app.destination.tmp.path}"/>
+            <arg path="${app.destination.current.path}"/>
+        </exec>
+    </target>
+
+    <target name="composer" depends="symlink">
+        <exec dir="${app.destination.current.path}" executable="composer" passthru="true">
             <arg value="install"/>
         </exec>
     </target>
+
 </project>
