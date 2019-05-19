@@ -1,2 +1,2 @@
 parameters:
-      app.site_name: 'test.com'
+      app.site_name: '{{site_name}}'
