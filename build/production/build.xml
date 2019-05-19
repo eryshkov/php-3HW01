@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="php-3HW01" default="prepare">
+<project name="php-3HW01" default="copyFiles" basedir=".">
     <target name="prepare">
-        <property name="app.destination.path" value="${project.basedir}"/>
+        <echo msg="I'm Phing"/>
+        <echo msg="My base dirrectory: ${project.basedir}"/>
+        <echo msg="Received destination directory: ${app.destination.path}"/>
+        <echo msg="Received domain: ${app.domain}"/>
+    </target>
+
+    <target name="copyFiles" depends="prepare">
+        <mkdir dir="${app.destination.path}"/>
+        <copy todir="${app.destination.path}">
+            <fileset dir="${project.basedir}">
+                <include name="**"/>
+                <exclude name="config/packages/myConfig.yaml"/>
+                <exclude name="screens/**"/>
+                <exclude name="build/**"/>
+                <exclude name="var/**"/>
+                <exclude name="vendor/**"/>
+                <exclude name=".editorconfig"/>
+                <exclude name="phing.phar"/>
+                <exclude name="*.md"/>
+            </fileset>
+        </copy>
+        <copy todir="${app.destination.path}/config/packages"
+              file="${project.basedir}/config/packages/myConfig.yaml"
+              overwrite="true">
+            <filterchain>
+                <replacetokens begintoken="{{" endtoken="}}">
+                    <token key="site_name" value="${app.domain}"></token>
+                </replacetokens>
+            </filterchain>
+        </copy>
     </target>
 </project>
