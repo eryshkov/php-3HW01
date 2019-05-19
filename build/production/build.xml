@@ -35,21 +35,19 @@
               overwrite="true">
             <filterchain>
                 <replacetokens begintoken="{{" endtoken="}}">
-                    <token key="domain" value="${app.domain}"></token>
+                    <token key="domain" value="${app.domain}"/>
                 </replacetokens>
             </filterchain>
         </copy>
     </target>
 
-    <target name="symlink.delete" depends="copyFiles">
+    <target name="symlink" depends="copyFiles">
         <exec dir="${app.destination.path}" executable="rm">
             <arg value="-f"/>
             <arg value="-v"/>
             <arg path="${app.destination.current.path}"/>
         </exec>
-    </target>
 
-    <target name="symlink" depends="symlink.delete">
         <exec dir="${app.destination.path}" executable="ln" passthru="true">
             <arg value="-s"/>
             <arg value="-v"/>
