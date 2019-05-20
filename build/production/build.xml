@@ -43,14 +43,14 @@
 
     <target name="symlink" depends="copyFiles">
         <exec dir="${app.destination.path}" executable="rm">
-            <arg value="-f"/>
-            <arg value="-v"/>
+            <arg line="-f"/>
+            <arg line="-v"/>
             <arg path="${app.destination.current.path}"/>
         </exec>
 
         <exec dir="${app.destination.path}" executable="ln" passthru="true">
-            <arg value="-s"/>
-            <arg value="-v"/>
+            <arg line="-s"/>
+            <arg line="-v"/>
             <arg path="${app.destination.tmp.path}"/>
             <arg path="${app.destination.current.path}"/>
         </exec>
@@ -58,7 +58,7 @@
 
     <target name="composer" depends="symlink">
         <exec dir="${app.destination.current.path}" executable="composer" passthru="true">
-            <arg value="install"/>
+            <arg line="install"/>
         </exec>
     </target>
 
